@@ -39,15 +39,17 @@
     </form>
 
     <h2>Scheduled Messages</h2>
-    <ul>
-        {% for message in scheduled_messages %}
-        <li>
-            {{ message['text'] }} to {{ message['number'] }} at {{ message['hour'] }}:{{ message['minute'] }}
-            <a href="{{ url_for('edit_message', message_id=message['id']) }}">Edit</a>
-        </li>
-        {% else %}
-        <li>No messages scheduled.</li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for message in scheduled_messages %}
+    <li>
+        {{ message['text'] }} to {{ message['number'] }} at {{ message['hour'] }}:{{ message['minute'] }}
+        <a href="{{ url_for('edit_message', message_id=message['id']) }}">Edit</a>
+        <a href="{{ url_for('delete_message', message_id=message['id']) }}" style="color: red;">Delete</a>
+    </li>
+    {% else %}
+    <li>No messages scheduled.</li>
+    {% endfor %}
+</ul>
+
 </body>
 </html>

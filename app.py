@@ -93,5 +93,11 @@ def edit_message(message_id):
     message_to_edit = next((msg for msg in scheduled_messages if msg['id'] == message_id), None)
     return render_template("edit_message.html", message=message_to_edit)
 
+@app.route("/delete/<int:message_id>")
+def delete_message(message_id):
+    global scheduled_messages
+    scheduled_messages = [msg for msg in scheduled_messages if msg['id'] != message_id]  # Remove the message
+    return redirect(url_for("home"))  
+
 if __name__ == "__main__":
     app.run(debug=True)
