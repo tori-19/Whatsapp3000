@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" content="width=device-width, initial-scale=1.0">
+    <title>Edit Scheduled Message</title>
+</head>
+<body>
+    <h1>Edit Scheduled Message</h1>
+    <form method="POST" action="">
+        <label for="number">Phone Number (with country code):</label>
+        <br>
+        <select id="country_code" name="country_code" required>
+            <option value="+1" {% if message['number'].startswith('+1') %}selected{% endif %}>(+1)</option>
+            <option value="+44" {% if message['number'].startswith('+44') %}selected{% endif %}>(+44)</option>
+            <option value="+91" {% if message['number'].startswith('+91') %}selected{% endif %}>(+91)</option>
+            <option value="+61" {% if message['number'].startswith('+61') %}selected{% endif %}>(+61)</option>
+            <option value="+27" {% if message['number'].startswith('+27') %}selected{% endif %}>(+27)</option>
+        </select>
+        <input type="text" id="number" name="number" placeholder="Phone Number" pattern="^[1-9][0-9]{6,14}$" required value="{{ message['number'][3:] }}"><br><br>
+
+        <label for="message">Message:</label>
+        <br>
+        <textarea id="message" name="message" placeholder="Message" required>{{ message['text'] }}</textarea><br><br>
+
+        <label for="date">Date:</label>
+        <br>
+        <input type="date" id="date" name="date" required value="{{ message['time'].date() }}"><br><br>
+
+        <label for="hour">Hour (24-hour format):</label>
+        <br>
+        <input type="number" id="hour" name="hour" min="0" max="23" required value="{{ message['hour'] }}"><br><br>
+
+        <label for="minute">Minute:</label>
+        <br>
+        <input type="number" id="minute" name="minute" min="0" max="59" required value="{{ message['minute'] }}"><br><br>
+
+        <button type="submit">Update Message</button>
+    </form>
+</body>
+</html>
