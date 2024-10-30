@@ -1,8 +1,14 @@
 import pywhatkit as kit
 
 def get_number():
-    """Get the WhatsApp number with country code."""
-    return input("Enter the phone number (with country code, e.g., +27605077578): ")
+    """Get the WhatsApp number with country code, ensuring it contains only digits and no spaces."""
+    while True:
+        number = input("Enter the phone number (with country code, e.g., +27605077578): ")
+        
+        if number.startswith("+") and number[1:].isdigit():
+            return number
+        else:
+            print("Invalid format. Please ensure it starts with + and contains only digits, with no spaces.")
 
 def get_msg():
     """Get the message to send."""
@@ -14,10 +20,10 @@ def get_time():
     minute = int(input("Enter the minute: "))
     return hour, minute
 
-# Collect information from the user
+
 number = get_number()
 message = get_msg()
 hour, minute = get_time()
 
-# Send the message
+
 kit.sendwhatmsg(number, message, hour, minute)
